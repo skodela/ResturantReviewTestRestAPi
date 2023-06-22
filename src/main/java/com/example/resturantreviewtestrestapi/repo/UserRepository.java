@@ -2,12 +2,12 @@ package com.example.resturantreviewtestrestapi.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.example.resturantreviewtestrestapi.model.UserModel;
+import com.example.resturantreviewtestrestapi.model.User;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository <UserModel,Long> {
+public interface UserRepository extends JpaRepository <User,Long> {
 
-    Optional<UserModel> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 }

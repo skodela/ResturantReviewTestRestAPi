@@ -2,13 +2,12 @@ package com.example.resturantreviewtestrestapi.Controllers;
 
 import com.example.resturantreviewtestrestapi.controllers.RestaurantController;
 import com.example.resturantreviewtestrestapi.controllers.ReviewController;
-import com.example.resturantreviewtestrestapi.model.ReviewModel;
+import com.example.resturantreviewtestrestapi.model.Review;
 import com.example.resturantreviewtestrestapi.service.ReviewService;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,43 +33,40 @@ public class ReviewControllerTest {
 
     @Test
     public void post_Test(){
-        ReviewModel reviewModel = new ReviewModel();
+        Review reviewModel = new Review();
         reviewModel.setReviewId(1l);
         reviewModel.setReviewerName("roopa");
         reviewModel.setRating(4);
-        reviewModel.setRestaurentId(101l);
         doReturn(reviewModel).when(reviewService).createReview(reviewModel);
-        ResponseEntity<ReviewModel> actualReviewModel = reviewController.createReview(reviewModel);
-        ReviewModel actualReviewModel1 = actualReviewModel.getBody();
-        org.junit.Assert.assertEquals(actualReviewModel1.getReviewId(),reviewModel.getReviewId());
-        Assert.assertEquals(actualReviewModel1.getReviewerName(),reviewModel.getReviewerName());
-        Assert.assertEquals(actualReviewModel1.getRating(),reviewModel.getRating());
-        Assert.assertEquals(actualReviewModel1.getRestaurentId(),reviewModel.getRestaurentId());
+     Review actualReviewModel = reviewController.createReview(reviewModel);
+        Review actualReviewModel1 = actualReviewModel;
+        Assertions.assertEquals(actualReviewModel1.getReviewId(),reviewModel.getReviewId());
+        Assertions.assertEquals(actualReviewModel1.getReviewerName(),reviewModel.getReviewerName());
+        Assertions.assertEquals(actualReviewModel1.getRating(),reviewModel.getRating());
     }
     @Test
     public void getAllReviews_Test(){
-        ReviewModel reviewModel = new ReviewModel();
+        Review reviewModel = new Review();
         reviewModel.setReviewId(1l);
         reviewModel.setReviewerName("roopa");
         reviewModel.setRating(4);
-        reviewModel.setRestaurentId(101l);
 
-        ReviewModel reviewModel1 = new ReviewModel();
+        Review reviewModel1 = new Review();
         reviewModel1.setReviewId(2l);
-        reviewModel1.setReviewerName("roopa kumar");
+        reviewModel1.setReviewerName("roopa reddy");
         reviewModel1.setRating(4);
-        reviewModel1.setRestaurentId(101l);
 
-        List<ReviewModel> reviewModels = new ArrayList<>();
+
+        List<Review> reviewModels = new ArrayList<>();
         reviewModels.add(reviewModel1);
         reviewModels.add(reviewModel);
         doReturn(reviewModel).when(reviewService).createReview(reviewModel);
-        List<ReviewModel> actualReviewModel = reviewController.getAllReviews();
+        List<Review> actualReviewModel = reviewController.getAllReviews();
         for(int i =0;i<actualReviewModel.size();i++) {
-            Assert.assertEquals(actualReviewModel.get(i).getReviewId(), reviewModels.get(i).getReviewId());
-            Assert.assertEquals(actualReviewModel.get(i).getReviewerName(), reviewModels.get(i).getReviewerName());
-            Assert.assertEquals(actualReviewModel.get(i).getRating(), reviewModels.get(i).getRating());
-            Assert.assertEquals(actualReviewModel.get(i).getRestaurentId(), reviewModels.get(i).getRestaurentId());
+            Assertions.assertEquals(actualReviewModel.get(i).getReviewId(), reviewModels.get(i).getReviewId());
+            Assertions.assertEquals(actualReviewModel.get(i).getReviewerName(), reviewModels.get(i).getReviewerName());
+            Assertions.assertEquals(actualReviewModel.get(i).getRating(), reviewModels.get(i).getRating());
+
         }
     }
 }

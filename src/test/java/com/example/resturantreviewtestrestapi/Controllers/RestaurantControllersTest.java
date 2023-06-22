@@ -6,16 +6,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import static org.junit.jupiter.api.Test.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
+import com.example.resturantreviewtestrestapi.model.Address;
+import com.example.resturantreviewtestrestapi.model.Restaurant;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,10 +24,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import com.example.resturantreviewtestrestapi.model.RestaurantModel;
+import com.example.resturantreviewtestrestapi.model.Restaurant;
 import com.example.resturantreviewtestrestapi.service.RestaurantService;
 import com.example.resturantreviewtestrestapi.controllers.RestaurantController;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(RestaurantController.class)
 //@AutoConfigureMockMvc
@@ -43,67 +45,87 @@ public class RestaurantControllersTest {
 
     @Test
     public void post_Test1(){
-        RestaurantModel expectedRestaurantModel = new RestaurantModel();
+        Restaurant expectedRestaurantModel = new Restaurant();
         expectedRestaurantModel.setRestaurantId(101L);
         expectedRestaurantModel.setName("Dominos");
-        expectedRestaurantModel.setAddress("texas");
-        expectedRestaurantModel.setCuisinetype("Pizza");
+        Address address = new Address();
+        address.setCity("Falls church");
+        address.setId(1l);
+        address.setState("VA");
+        address.setZip("22044");
+        expectedRestaurantModel.setAddress(address);
+        expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chineese);
         expectedRestaurantModel.setWebsite("www.dominos.com");
         doReturn(expectedRestaurantModel).when(service).createRestaurant(expectedRestaurantModel);
-        ResponseEntity<RestaurantModel> actualRestaurantModels =  controller.createRestaurant(expectedRestaurantModel);
-        RestaurantModel actualRestaurantModel = actualRestaurantModels.getBody();
-        Assert.assertEquals(expectedRestaurantModel.getRestaurantId(),actualRestaurantModel.getRestaurantId());
-        Assert.assertEquals(expectedRestaurantModel.getName(),actualRestaurantModel.getName());
-        Assert.assertEquals(expectedRestaurantModel.getAddress(),actualRestaurantModel.getAddress());
-        Assert.assertEquals(expectedRestaurantModel.getReviews(),actualRestaurantModel.getReviews());
-        Assert.assertEquals(expectedRestaurantModel.getWebsite(),actualRestaurantModel.getWebsite());
+        Restaurant actualRestaurantModels =  controller.createRestaurant(expectedRestaurantModel);
+        Restaurant actualRestaurantModel = actualRestaurantModels;
+        Assertions.assertEquals(expectedRestaurantModel.getRestaurantId(),actualRestaurantModel.getRestaurantId());
+        Assertions.assertEquals(expectedRestaurantModel.getName(),actualRestaurantModel.getName());
+        Assertions.assertEquals(expectedRestaurantModel.getAddress(),actualRestaurantModel.getAddress());
+        Assertions.assertEquals(expectedRestaurantModel.getReviews(),actualRestaurantModel.getReviews());
+        Assertions.assertEquals(expectedRestaurantModel.getWebsite(),actualRestaurantModel.getWebsite());
 
     }
     @Test
     public void put_Test1(){
-        RestaurantModel expectedRestaurantModel = new RestaurantModel();
+        Restaurant expectedRestaurantModel = new Restaurant();
         expectedRestaurantModel.setRestaurantId(101L);
         expectedRestaurantModel.setName("Dominos");
-        expectedRestaurantModel.setAddress("texas");
-        expectedRestaurantModel.setCuisinetype("Pizza");
+         Address address = new Address();
+        address.setCity("Falls church");
+        address.setId(1l);
+        address.setState("VA");
+        address.setZip("22044");
+        expectedRestaurantModel.setAddress(address);
+        expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chineese);
         expectedRestaurantModel.setWebsite("www.dominos.com");
         doReturn(expectedRestaurantModel).when(service).updateRestaurant(expectedRestaurantModel);
-        ResponseEntity<RestaurantModel> actualRestaurantModels =  controller.updateRestaurant(expectedRestaurantModel);
-        RestaurantModel actualRestaurantModel = actualRestaurantModels.getBody();
-        Assert.assertEquals(expectedRestaurantModel.getRestaurantId(),actualRestaurantModel.getRestaurantId());
-        Assert.assertEquals(expectedRestaurantModel.getName(),actualRestaurantModel.getName());
-        Assert.assertEquals(expectedRestaurantModel.getAddress(),actualRestaurantModel.getAddress());
-        Assert.assertEquals(expectedRestaurantModel.getReviews(),actualRestaurantModel.getReviews());
-        Assert.assertEquals(expectedRestaurantModel.getWebsite(),actualRestaurantModel.getWebsite());
+        Restaurant actualRestaurantModels =  controller.updateRestaurant(expectedRestaurantModel);
+        Restaurant actualRestaurantModel = actualRestaurantModels;
+        Assertions.assertEquals(expectedRestaurantModel.getRestaurantId(),actualRestaurantModel.getRestaurantId());
+        Assertions.assertEquals(expectedRestaurantModel.getName(),actualRestaurantModel.getName());
+        Assertions.assertEquals(expectedRestaurantModel.getAddress(),actualRestaurantModel.getAddress());
+        Assertions.assertEquals(expectedRestaurantModel.getReviews(),actualRestaurantModel.getReviews());
+        Assertions.assertEquals(expectedRestaurantModel.getWebsite(),actualRestaurantModel.getWebsite());
 
     }
     @Test
     public void getAllRestaurant_Test1(){
-        RestaurantModel expectedRestaurantModel = new RestaurantModel();
+        Restaurant expectedRestaurantModel = new Restaurant();
         expectedRestaurantModel.setRestaurantId(101L);
         expectedRestaurantModel.setName("Dominos");
-        expectedRestaurantModel.setAddress("texas");
-        expectedRestaurantModel.setCuisinetype("Pizza");
+        Address address = new Address();
+        address.setCity("Falls church");
+        address.setId(1l);
+        address.setState("VA");
+        address.setZip("22044");
+        expectedRestaurantModel.setAddress(address);
+        expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chineese);
         expectedRestaurantModel.setWebsite("www.dominos.com");
 
-        RestaurantModel expectedRestaurantModel1 = new RestaurantModel();
+        Restaurant expectedRestaurantModel1 = new Restaurant();
         expectedRestaurantModel1.setRestaurantId(102L);
         expectedRestaurantModel1.setName("Dominos1");
-        expectedRestaurantModel1.setAddress("texas1");
-        expectedRestaurantModel1.setCuisinetype("Pizza1");
+        Address address1 = new Address();
+        address1.setCity("Falls church");
+        address1.setId(1l);
+        address1.setState("VA");
+        address1.setZip("22044");
+        expectedRestaurantModel.setAddress(address1);
+        expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chineese);
         expectedRestaurantModel1.setWebsite("www.dominos1.com");
-        List<RestaurantModel> restaurantModels = new ArrayList<>();
+        List<Restaurant> restaurantModels = new ArrayList<>();
         restaurantModels.add(expectedRestaurantModel);
         restaurantModels.add(expectedRestaurantModel);
         restaurantModels.add(expectedRestaurantModel1);
         doReturn(restaurantModels).when(service).getAllRestaurants();
-        List<RestaurantModel> actualRestaurantModels =  controller.getAllRestaurants();
+        List<Restaurant> actualRestaurantModels =  controller.getAllRestaurants();
         for (int i=0;i<actualRestaurantModels.size();i++) {
-            Assert.assertEquals(restaurantModels.get(i).getRestaurantId(),actualRestaurantModels.get(i).getRestaurantId());
-            Assert.assertEquals(restaurantModels.get(i).getName(),actualRestaurantModels.get(i).getName());
-            Assert.assertEquals(restaurantModels.get(i).getAddress(),actualRestaurantModels.get(i).getAddress());
-            Assert.assertEquals(restaurantModels.get(i).getReviews(),actualRestaurantModels.get(i).getReviews());
-            Assert.assertEquals(restaurantModels.get(i).getWebsite(),actualRestaurantModels.get(i).getWebsite());
+            Assertions.assertEquals(restaurantModels.get(i).getRestaurantId(),actualRestaurantModels.get(i).getRestaurantId());
+            Assertions.assertEquals(restaurantModels.get(i).getName(),actualRestaurantModels.get(i).getName());
+            Assertions.assertEquals(restaurantModels.get(i).getAddress(),actualRestaurantModels.get(i).getAddress());
+            Assertions.assertEquals(restaurantModels.get(i).getReviews(),actualRestaurantModels.get(i).getReviews());
+            Assertions.assertEquals(restaurantModels.get(i).getWebsite(),actualRestaurantModels.get(i).getWebsite());
 
         }
 
@@ -111,12 +133,12 @@ public class RestaurantControllersTest {
 
 
     //@Test
-   /* void testGetAllCars() throws Exception {
+ /*void testGetAllCars() throws Exception {
         String uri = STARTING_URI + "/car";
-        RestaurantModel[] restaurants = {
-                new RestaurantModel(),
+        Restaurant[] restaurants = {
+                new Restaurant(),
                 new RestaurantModel()};
-        List<RestaurantModel> allres = Arrays.asList(restaurants);
+        List<Restaurant> allres = Arrays.asList(restaurants);
         when(service.getAllRestaurants()).thenReturn(allres);
         mockMvc.perform(get(uri))
                 .andDo(print())
@@ -139,14 +161,16 @@ public class RestaurantControllersTest {
         verifyNoMoreInteractions(service);
     }*/
 
+
     // json - string conversions
-  /*  public static String asJsonString(final Object obj) {
+  /*public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }*/
+
 }
 
 

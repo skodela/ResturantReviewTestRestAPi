@@ -3,13 +3,14 @@ package com.example.resturantreviewtestrestapi.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.resturantreviewtestrestapi.model.ReviewModel;
+import com.example.resturantreviewtestrestapi.model.Restaurant;
+import com.example.resturantreviewtestrestapi.model.Review;
 import com.example.resturantreviewtestrestapi.repo.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.resturantreviewtestrestapi.repo.RestaurantRepository;
-import com.example.resturantreviewtestrestapi.model.RestaurantModel;
+import com.example.resturantreviewtestrestapi.model.Restaurant;
 
 @Service
 public class RestaurantService {
@@ -20,24 +21,24 @@ public class RestaurantService {
     ReviewRepository reviewRepository;
 
     //GET ALL RESTAURANTS
-    public List<RestaurantModel> getAllRestaurants() {
-        return (List<RestaurantModel>) repo.findAll();
+    public List<Restaurant> getAllRestaurants() {
+        return (List<Restaurant>) repo.findAll();
     }
 
     //FIND BY ID
-    public RestaurantModel getRestaurantById(long id) {
+    public Restaurant getRestaurantById(long id) {
 
-        Optional<RestaurantModel> found = repo.findById(id);
+        Optional<Restaurant> found = repo.findById(id);
 
         if(found.isPresent()) {
-            Long Id = found.get().getRestaurantId();
-            List<ReviewModel> reviewModels =  reviewRepository.findByRestaurentId(Id);
-            found.get().setReviews((long) reviewModels.size());
-            repo.save(found.get());
+          Long Id = found.get().getRestaurantId();
+            /*  List<Review> reviews = found.get().getReviews();
+            found.get().setReviews(reviews);
+            repo.save(found.get());*/
             return found.get();
         }
 
-        return new RestaurantModel();
+        return new Restaurant();
 
     }
 //    //FIND BY NAME
@@ -51,7 +52,7 @@ public class RestaurantService {
 //
 //    }
    //CREATE RESTAURANT
-    public RestaurantModel createRestaurant(RestaurantModel res) {
+    public Restaurant createRestaurant(Restaurant res) {
 
     /*if(repo.existsById(res.getRestaurantId()))*/
         return repo.save(res) ;
@@ -61,8 +62,8 @@ public class RestaurantService {
 }
 
     //UPDATE RESTAURANT
-    public RestaurantModel updateRestaurant(RestaurantModel res) {
-        Optional<RestaurantModel> restaurantModel =   repo.findById(res.getRestaurantId());
+    public Restaurant updateRestaurant(Restaurant res) {
+        Optional<Restaurant> restaurantModel =   repo.findById(res.getRestaurantId());
         if(restaurantModel.isPresent()){
             return  repo.save(res);
         }

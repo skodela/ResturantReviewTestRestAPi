@@ -1,6 +1,6 @@
 package com.example.resturantreviewtestrestapi.service;
 
-import com.example.resturantreviewtestrestapi.model.UserModel ;
+import com.example.resturantreviewtestrestapi.model.User ;
 import com.example.resturantreviewtestrestapi.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,28 +15,28 @@ public class UserService {
     UserRepository repo;
 
     //Get All Users
-    public List<UserModel> getAllUsers() {
+    public List<User> getAllUsers() {
         return repo.findAll();
     }
 
     //Find By ID
-    public UserModel getUserById(long id) {
+    public User getUserById(long id) {
 
-        Optional<UserModel> user = repo.findById(id);
+        Optional<User> user = repo.findById(id);
         if (user.isPresent()) {
             return user.get();
         }
-        return new UserModel();
+        return new User();
 
     }
     //Find By username
-    public UserModel getUserByUserName(String username) {
+    public User getUserByUserName(String username) {
 
-        Optional<UserModel> user = repo.findByUsername(username);
+        Optional<User> user = repo.findByUsername(username);
         if(user.isPresent()) {
             return user.get();
         }
-        return new UserModel();
+        return new User();
 
     }
 }

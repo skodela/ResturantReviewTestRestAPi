@@ -1,5 +1,6 @@
 package com.example.resturantreviewtestrestapi.controllers;
-import com.example.resturantreviewtestrestapi.model.RestaurantModel;
+import com.example.resturantreviewtestrestapi.model.Restaurant;
+import com.example.resturantreviewtestrestapi.model.Restaurant;
 import com.example.resturantreviewtestrestapi.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,41 +21,37 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
     @GetMapping
-    public List<RestaurantModel> getAllRestaurants() {
+    public List<Restaurant> getAllRestaurants() {
         return service.getAllRestaurants() ;
     }
     @GetMapping("/{id}")
-    public RestaurantModel getRestaurantbyId(@PathVariable Long id) {
-        return service.getRestaurantById(id) ;
+    public Restaurant getRestaurantbyId(@PathVariable Long id) {
+        Restaurant restaurant = service.getRestaurantById(id);
+        return restaurant;
     }
 
     //CREATE RESTAURANT
     @PostMapping
-    public ResponseEntity<RestaurantModel> createRestaurant(@RequestBody RestaurantModel res) {
+    public Restaurant createRestaurant(@RequestBody Restaurant res) {
 
-        RestaurantModel newRes = service.createRestaurant(res);
-        if(newRes.getRestaurantId()==-1L)
-            return new ResponseEntity<>(newRes, HttpStatus.CONFLICT);
-            return new ResponseEntity<>(newRes, HttpStatus.CREATED);
+        Restaurant newRes = service.createRestaurant(res);
+        return newRes;
     }
 
     //UPDATE RESTAURANT
     @PutMapping
-    public ResponseEntity<RestaurantModel> updateRestaurant(@RequestBody RestaurantModel res) {
-        RestaurantModel toBeUpdated = service.updateRestaurant(res) ;
-        if (toBeUpdated.getRestaurantId() == -1L)
-            return new ResponseEntity<>(toBeUpdated, HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(toBeUpdated, HttpStatus.OK);
+    public Restaurant updateRestaurant(@RequestBody Restaurant res) {
+        Restaurant toBeUpdated = service.updateRestaurant(res) ;
+        return toBeUpdated;
     }
 
     //DELETE RESTAURANT
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRestaurant(@PathVariable long id) {
+    public String deleteRestaurant(@PathVariable long id) {
 
         boolean deleted = service.deleteRestaurant(id);
-        if(!deleted) return new ResponseEntity<>("Restaurant not found", HttpStatus.NOT_FOUND);
-
-        return new ResponseEntity<>("Restaurant deleted Successfully", HttpStatus.OK);
+        if(!deleted) return "Restaurant not found";
+        return "Restaurant deleted Successfully";
 
     }
 }

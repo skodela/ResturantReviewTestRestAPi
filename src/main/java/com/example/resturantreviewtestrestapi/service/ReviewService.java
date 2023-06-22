@@ -1,4 +1,5 @@
 package com.example.resturantreviewtestrestapi.service;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.example.resturantreviewtestrestapi.model.ReviewModel;
+import com.example.resturantreviewtestrestapi.model.Review;
 import com.example.resturantreviewtestrestapi.repo.ReviewRepository;
 @Service
 public class ReviewService {
@@ -23,28 +24,28 @@ public class ReviewService {
     }
 
     //GET ALL
-    public List<ReviewModel> getAllReviews() {
+    public List<Review> getAllReviews() {
         return repo.findAll();
     }
 
     //FIND REVIEW BY ID
-    public ReviewModel getReviewById(long id) {
+    public Review getReviewById(long id) {
 
-        Optional<ReviewModel> foundReview = repo.findById(id);
+        Optional<Review> foundReview = repo.findById(id);
 
         if(foundReview.isPresent()) return foundReview.get();
 
-        return new ReviewModel();
+        return new Review();
 
     }
 
 
     //FIND REVIEW BY RATING (filtering reviews based on no of stars)
-    public List<ReviewModel> getReviewsByRating(int rating) {
+    public List<Review> getReviewsByRating(int rating) {
 
-        List<ReviewModel> all = repo.findAll();
+        List<Review> all = repo.findAll();
 
-        List<ReviewModel> filteredReviews = all.stream()
+        List<Review> filteredReviews = all.stream()
                 .filter(r -> r.getRating() == rating)
                 .collect(Collectors.toList());
 
@@ -65,21 +66,21 @@ public class ReviewService {
 
 
     //CREATE REVIEW
-    public ReviewModel createReview(ReviewModel rev) {
+    public Review createReview(Review rev) {
 
         if(repo.existsById(rev.getReviewId())) return repo.save(rev);
-        Date currentDate = Calendar.getInstance().getTime();
+        LocalDate currentDate =  LocalDate.now();
         rev.setDateCreated(currentDate);
         return repo.save(rev);
 
     }
 
     //UPDATE REVIEW
-    public ReviewModel updateReview(ReviewModel rev) {
+    public Review updateReview(Review rev) {
 
         if(repo.existsById(rev.getReviewId())) return repo.save(rev);
 
-        return new ReviewModel();
+        return new Review();
 
     }
 
