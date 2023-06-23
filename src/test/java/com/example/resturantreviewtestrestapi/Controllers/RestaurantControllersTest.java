@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.example.resturantreviewtestrestapi.model.Address;
+import com.example.resturantreviewtestrestapi.model.Cuisine;
 import com.example.resturantreviewtestrestapi.model.Restaurant;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -54,7 +55,7 @@ public class RestaurantControllersTest {
         address.setState("VA");
         address.setZip("22044");
         expectedRestaurantModel.setAddress(address);
-        expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chineese);
+        expectedRestaurantModel.setCuisine(Cuisine.CHINNESE);
         expectedRestaurantModel.setWebsite("www.dominos.com");
         doReturn(expectedRestaurantModel).when(service).createRestaurant(expectedRestaurantModel);
         Restaurant actualRestaurantModels =  controller.createRestaurant(expectedRestaurantModel);
@@ -77,7 +78,7 @@ public class RestaurantControllersTest {
         address.setState("VA");
         address.setZip("22044");
         expectedRestaurantModel.setAddress(address);
-        expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chineese);
+        expectedRestaurantModel.setCuisine( Cuisine.CHINNESE);
         expectedRestaurantModel.setWebsite("www.dominos.com");
         doReturn(expectedRestaurantModel).when(service).updateRestaurant(expectedRestaurantModel);
         Restaurant actualRestaurantModels =  controller.updateRestaurant(expectedRestaurantModel);
@@ -100,7 +101,7 @@ public class RestaurantControllersTest {
         address.setState("VA");
         address.setZip("22044");
         expectedRestaurantModel.setAddress(address);
-        expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chineese);
+        expectedRestaurantModel.setCuisine( Cuisine.CHINNESE);
         expectedRestaurantModel.setWebsite("www.dominos.com");
 
         Restaurant expectedRestaurantModel1 = new Restaurant();
@@ -112,7 +113,7 @@ public class RestaurantControllersTest {
         address1.setState("VA");
         address1.setZip("22044");
         expectedRestaurantModel.setAddress(address1);
-        expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chineese);
+        expectedRestaurantModel.setCuisine( Cuisine.CHINNESE);
         expectedRestaurantModel1.setWebsite("www.dominos1.com");
         List<Restaurant> restaurantModels = new ArrayList<>();
         restaurantModels.add(expectedRestaurantModel);

@@ -3,6 +3,7 @@ package com.example.resturantreviewtestrestapi.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,22 +25,24 @@ public class Restaurant {
     @JoinColumn(name = "FK_address" )
     public Address address;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "FK_review" )
-    public List<Review> reviews;
+
+    @OneToMany(targetEntity =Review.class, cascade = CascadeType.ALL)
+    @JoinColumn(name="review_fk",referencedColumnName = "restaurantId")
+    private List<Review> reviews = new ArrayList<>();
 
 
     @Column
     String website;
 
     @Column
+    @Enumerated(EnumType.STRING)
     Cuisine cuisine;
-    public enum Cuisine{
+    /*public enum Cuisine{
         Chineese,
         Italian,
         American,
         Indian
-    };
+    };*/
 
   /*  @Override
     public String toString() {

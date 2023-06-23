@@ -4,16 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
+import lombok.NonNull;
 /*import javax.persistence.*;*/
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 public class User {
 
         @Id
+        @NonNull
       //  @GeneratedValue(strategy = GenerationType.AUTO)
         Long userId;
 
@@ -26,9 +28,9 @@ public class User {
         @Column
         String name;
 
-        @OneToMany(cascade = CascadeType.ALL)
+       /* @OneToMany(cascade = CascadeType.ALL)
         @JoinColumn(name = "fk_userReview", referencedColumnName = "userId")
-        List<Review> reviews;
+        List<Review> reviews;*/
 
         final String role = "USER";
 

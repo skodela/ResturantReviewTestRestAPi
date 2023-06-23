@@ -1,17 +1,18 @@
 package com.example.resturantreviewtestrestapi.model;
 
-import lombok.Data;
+import lombok.*;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 //import javax.persistence.*;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor(force = true)
 @Getter
 @Setter
 public class Address {
     @Id
+    @NonNull
     public Long id;
     public String street;
     public String city;

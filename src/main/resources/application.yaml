@@ -3,10 +3,10 @@ spring:
     console:
       enabled: true
   datasource:
-    url: jdbc:h2:file:/data/myDB
+    url: jdbc:h2:file:/data/myDB1
     driverClassName: org.h2.Driver
-    username: sa
-    password: password
+    username: sa1
+    password: password1
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,4 +14,4 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
 server:
-  port: 8080
+  port: 8081
