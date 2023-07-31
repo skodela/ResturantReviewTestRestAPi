@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.example.resturantreviewtestrestapi.model.Address;
-import com.example.resturantreviewtestrestapi.model.Cuisine;
 import com.example.resturantreviewtestrestapi.model.Restaurant;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -50,12 +49,12 @@ public class RestaurantControllersTest {
         expectedRestaurantModel.setRestaurantId(101L);
         expectedRestaurantModel.setName("Dominos");
         Address address = new Address();
-        address.setCity("Falls church");
-        address.setId(1l);
-        address.setState("VA");
-        address.setZip("22044");
+        address.setCity("KPHB");
+        address.setAddress_id(1l);
+        address.setState("TS");
+        address.setZip("508252");
         expectedRestaurantModel.setAddress(address);
-        expectedRestaurantModel.setCuisine(Cuisine.CHINNESE);
+        //expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chinease);
         expectedRestaurantModel.setWebsite("www.dominos.com");
         doReturn(expectedRestaurantModel).when(service).createRestaurant(expectedRestaurantModel);
         Restaurant actualRestaurantModels =  controller.createRestaurant(expectedRestaurantModel);
@@ -73,12 +72,12 @@ public class RestaurantControllersTest {
         expectedRestaurantModel.setRestaurantId(101L);
         expectedRestaurantModel.setName("Dominos");
          Address address = new Address();
-        address.setCity("Falls church");
-        address.setId(1l);
-        address.setState("VA");
-        address.setZip("22044");
+        address.setCity("KPHB");
+        address.setAddress_id(1l);
+        address.setState("TS");
+        address.setZip("508252");
         expectedRestaurantModel.setAddress(address);
-        expectedRestaurantModel.setCuisine( Cuisine.CHINNESE);
+      //  expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chinease);
         expectedRestaurantModel.setWebsite("www.dominos.com");
         doReturn(expectedRestaurantModel).when(service).updateRestaurant(expectedRestaurantModel);
         Restaurant actualRestaurantModels =  controller.updateRestaurant(expectedRestaurantModel);
@@ -96,24 +95,24 @@ public class RestaurantControllersTest {
         expectedRestaurantModel.setRestaurantId(101L);
         expectedRestaurantModel.setName("Dominos");
         Address address = new Address();
-        address.setCity("Falls church");
-        address.setId(1l);
-        address.setState("VA");
-        address.setZip("22044");
+        address.setCity("KPHB");
+        address.setAddress_id(1l);
+        address.setState("TS");
+        address.setZip("508252");
         expectedRestaurantModel.setAddress(address);
-        expectedRestaurantModel.setCuisine( Cuisine.CHINNESE);
+       // expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chinease);
         expectedRestaurantModel.setWebsite("www.dominos.com");
 
         Restaurant expectedRestaurantModel1 = new Restaurant();
         expectedRestaurantModel1.setRestaurantId(102L);
         expectedRestaurantModel1.setName("Dominos1");
         Address address1 = new Address();
-        address1.setCity("Falls church");
-        address1.setId(1l);
-        address1.setState("VA");
-        address1.setZip("22044");
+        address1.setCity("KPHB");
+        address1.setAddress_id(1l);
+        address1.setState("TS");
+        address1.setZip("508252");
         expectedRestaurantModel.setAddress(address1);
-        expectedRestaurantModel.setCuisine( Cuisine.CHINNESE);
+      //  expectedRestaurantModel.setCuisine( Restaurant.Cuisine.Chinease);
         expectedRestaurantModel1.setWebsite("www.dominos1.com");
         List<Restaurant> restaurantModels = new ArrayList<>();
         restaurantModels.add(expectedRestaurantModel);
@@ -134,11 +133,11 @@ public class RestaurantControllersTest {
 
 
     //@Test
- /*void testGetAllCars() throws Exception {
+void testGetAllCars() throws Exception {
         String uri = STARTING_URI + "/car";
         Restaurant[] restaurants = {
                 new Restaurant(),
-                new RestaurantModel()};
+               };
         List<Restaurant> allres = Arrays.asList(restaurants);
         when(service.getAllRestaurants()).thenReturn(allres);
         mockMvc.perform(get(uri))
@@ -151,27 +150,39 @@ public class RestaurantControllersTest {
                 .andExpect(jsonPath("$[0].address").value(allres.get(0).getAddress()))
                 .andExpect(jsonPath("$[0].review").value(allres.get(0).getReviews()))
                 .andExpect(jsonPath("$[0].website").value(allres.get(0).getWebsite()))
-                .andExpect(jsonPath("$[0].cuisinetype").value(allres.get(0).getCuisinetype()))
+                .andExpect(jsonPath("$[0].cuisinetype").value(allres.get(0).getCuisine()))
                 .andExpect(jsonPath("$[0].id").value(allres.get(0).getRestaurantId()))
                 .andExpect(jsonPath("$[0].name").value(allres.get(0).getName()))
                 .andExpect(jsonPath("$[0].address").value(allres.get(0).getAddress()))
                 .andExpect(jsonPath("$[0].review").value(allres.get(0).getReviews()))
                 .andExpect(jsonPath("$[0].website").value(allres.get(0).getWebsite()))
-                .andExpect(jsonPath("$[0].cuisinetype").value(allres.get(0).getCuisinetype()));
+                .andExpect(jsonPath("$[0].cuisinetype").value(allres.get(0).getCuisine()));
         verify(service, times(1)).getAllRestaurants();
         verifyNoMoreInteractions(service);
-    }*/
+    }
+
+
+
 
 
     // json - string conversions
-  /*public static String asJsonString(final Object obj) {
+
+
+
+
+public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }*/
+    }
+
+
+
 
 }
+
+
 
 

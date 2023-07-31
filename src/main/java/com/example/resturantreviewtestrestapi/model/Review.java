@@ -1,5 +1,7 @@
 package com.example.resturantreviewtestrestapi.model;
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -8,32 +10,39 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "reviewId")
 public class Review {
+   /* @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id;*/
     @Id
     @NonNull
-    @Column
-    Long reviewId;
-    @Column
-    Integer rating;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long reviewId;
+    private Integer rating;
 
-   // public Restaurant restaurant;
-    @Column
-    String reviewerName;
-    /*@Column
-    LocalDate dateCreated;*/
-/*   @OneToMany(mappedBy ="reviews")
-    public Restaurant restaurant;*/
-   /* @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    private User user;*/
-    @Column
-    LocalDate dateCreated =  LocalDate.now() ;
+    private String reviewerName;
+     private LocalDate dateCreated =  LocalDate.now() ;
+    @ManyToOne
+    @JoinColumn(name = "user1")
+    private User_Info user1;
+    @ManyToOne
+   /* @JoinColumn(name = "restaurantId")*/
+    private Restaurant restaurant;
 
+    @Override
+    public String toString() {
+        return "Review : {" +
+                "reviewId=" + reviewId +
+                ", rating=" + rating +
+                ", reviewerName='" + reviewerName + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", user1=" + user1.getUserId()+
+                ", restaurant=" + restaurant.getRestaurantId() +
+                '}';
+    }
 }
-

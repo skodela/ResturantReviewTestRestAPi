@@ -14,6 +14,5 @@ import com.example.resturantreviewtestrestapi.model.Review;
 public interface ReviewRepository extends JpaRepository<Review, Long>{
     Optional<Review> findById(Long id);
 
- /*   List<Review> findByRestaurentId(Long restaurentId);*/
 
 }

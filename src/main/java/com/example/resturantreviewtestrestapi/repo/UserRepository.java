@@ -1,13 +1,14 @@
 package com.example.resturantreviewtestrestapi.repo;
 
+import com.example.resturantreviewtestrestapi.model.User_Info;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.example.resturantreviewtestrestapi.model.User;
+
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository <User,Long> {
+public interface UserRepository extends JpaRepository <User_Info,Long> {
 
-    Optional<User> findByUsername(String username);
+    Optional<User_Info> findByUsername(String username);
 }

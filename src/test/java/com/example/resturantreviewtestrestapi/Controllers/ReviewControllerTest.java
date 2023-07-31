@@ -53,7 +53,7 @@ public class ReviewControllerTest {
 
         Review reviewModel1 = new Review();
         reviewModel1.setReviewId(2l);
-        reviewModel1.setReviewerName("roopa reddy");
+        reviewModel1.setReviewerName("roopa kumar");
         reviewModel1.setRating(4);
 
 

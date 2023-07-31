@@ -40,7 +40,6 @@ public class ReviewService {
     }
 
 
-    //FIND REVIEW BY RATING (filtering reviews based on no of stars)
     public List<Review> getReviewsByRating(int rating) {
 
         List<Review> all = repo.findAll();
@@ -53,16 +52,6 @@ public class ReviewService {
 
     }
 
-    //FIND REVIEW BY USER ID
-   /* public ReviewModel getReviewByUserId(long userId) {
-
-        Optional<ReviewModel> foundReview = repo.findByUserId(userId);
-
-        if(foundReview.isPresent()) return foundReview.get();
-
-        return new ReviewModel();
-
-    }*/
 
 
     //CREATE REVIEW
@@ -70,7 +59,6 @@ public class ReviewService {
 
         if(repo.existsById(rev.getReviewId())) return repo.save(rev);
         LocalDate currentDate =  LocalDate.now();
-        //rev.setDateCreated(currentDate);
         return repo.save(rev);
 
     }

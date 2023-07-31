@@ -32,32 +32,17 @@ public class RestaurantService {
 
         if(found.isPresent()) {
           Long Id = found.get().getRestaurantId();
-            /*  List<Review> reviews = found.get().getReviews();
-            found.get().setReviews(reviews);
-            repo.save(found.get());*/
             return found.get();
         }
 
         return new Restaurant();
 
     }
-//    //FIND BY NAME
-//    public RestaurantModel getRestaurantByName(String name) {
-//
-//       Optional<RestaurantModel> found = repo.findByName(name);
-//
-//        if(found.isPresent()) return found.get();
-//
-//        return new RestaurantModel();
-//
-//    }
    //CREATE RESTAURANT
     public Restaurant createRestaurant(Restaurant res) {
 
-    /*if(repo.existsById(res.getRestaurantId()))*/
         return repo.save(res) ;
 
-       // return new RestaurantModel(res.getRestaurantId(),res.getName(),res.getAddress(), res.getReview_id(), res.getCuisinetype(), res.getWebsite());
 
 }
 
@@ -70,9 +55,6 @@ public class RestaurantService {
         else {
             return repo.save(res);
         }
-    /*    if(repo.existsById(res.getRestaurantId())) return repo.save(res);
-
-        return new RestaurantModel(res.getRestaurantId(),res.getName(),res.getAddress(), res.getReview_id(), res.getCuisinetype(), res.getWebsite());*/
 
     }
     //DELETE RESTAURANT
